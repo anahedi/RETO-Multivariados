@@ -2,20 +2,18 @@ hola!
 En este repositorio encontrarán la estrucutra de nuestro reto.
 
 ├── data
-│   ├── external       <- Data from third party sources.
-│   ├── interim        <- Intermediate data that has been transformed.
-│   ├── processed      <- The final, canonical data sets for modeling.
-│   └── raw            <- The original, immutable data dump.
+│   ├── external     <- Datos de fuentes externas
+│   ├── interim      <- Datos intermedios que han sido transformados.
+│   ├── processed    <- El conjunto de datos final y canónico para el modelado.
+│   └── raw          <- Los datos originales, inmutables.
 │
-├── docs               <-  Documentacion
-││
-├── notebooks          <- Jupyter notebooks
-│                         
+├── docs             <- Documentación del proyecto.
 │
-├── pyproject.toml     <- Project configuration file with package metadata for 
-│                         {{ cookiecutter.module_name }} and configuration for tools like black
+├── notebooks        <- Jupyter notebooks para exploración, limpieza y análisis.
 │
-├── references         <- Data dictionaries, manuals, and all other explanatory materials.
+├── references       <- Diccionarios de datos, manuales y otros materiales explicativos.
 │
-├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
-│   └── figures        <- Generated graphics and figures to be used in reporting
+├── reports
+│   └── figures      <- Gráficos y figuras generadas para los reportes.
+│
+├── pyproject.toml   <- Archivo de configuración del proyecto y dependencias.
