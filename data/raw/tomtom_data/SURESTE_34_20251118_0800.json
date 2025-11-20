@@ -1,0 +1,24 @@
+{
+  "flowSegmentData": {
+    "frc": "FRC3",
+    "currentSpeed": 17,
+    "freeFlowSpeed": 23,
+    "currentTravelTime": 10,
+    "freeFlowTravelTime": 7,
+    "confidence": 1,
+    "roadClosure": false,
+    "coordinates": {
+      "coordinate": [
+        {
+          "latitude": 25.662197097583253,
+          "longitude": -100.2402288374119
+        },
+        {
+          "latitude": 25.662076366433737,
+          "longitude": -100.23974201647559
+        }
+      ]
+    },
+    "@version": "4"
+  }
+}

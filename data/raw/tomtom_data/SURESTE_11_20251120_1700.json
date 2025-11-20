@@ -1,0 +1,88 @@
+{
+  "flowSegmentData": {
+    "frc": "FRC2",
+    "currentSpeed": 40,
+    "freeFlowSpeed": 53,
+    "currentTravelTime": 51,
+    "freeFlowTravelTime": 38,
+    "confidence": 1,
+    "roadClosure": false,
+    "coordinates": {
+      "coordinate": [
+        {
+          "latitude": 25.67758357656883,
+          "longitude": -100.23095644084526
+        },
+        {
+          "latitude": 25.677537949422327,
+          "longitude": -100.2307204064519
+        },
+        {
+          "latitude": 25.677391776244313,
+          "longitude": -100.22995195356894
+        },
+        {
+          "latitude": 25.677322051197546,
+          "longitude": -100.22959521976989
+        },
+        {
+          "latitude": 25.67731532797852,
+          "longitude": -100.22956035105268
+        },
+        {
+          "latitude": 25.6772415991698,
+          "longitude": -100.22917545405896
+        },
+        {
+          "latitude": 25.677195971892306,
+          "longitude": -100.22895283071067
+        },
+        {
+          "latitude": 25.67716379105373,
+          "longitude": -100.22879860369227
+        },
+        {
+          "latitude": 25.677047078784334,
+          "longitude": -100.22819376555928
+        },
+        {
+          "latitude": 25.676989440255795,
+          "longitude": -100.22795102564338
+        },
+        {
+          "latitude": 25.676982717017992,
+          "longitude": -100.22791749803068
+        },
+        {
+          "latitude": 25.67683654315896,
+          "longitude": -100.22716245619281
+        },
+        {
+          "latitude": 25.676782908261334,
+          "longitude": -100.22688350645521
+        },
+        {
+          "latitude": 25.676761454295544,
+          "longitude": -100.22677353588556
+        },
+        {
+          "latitude": 25.67675208706976,
+          "longitude": -100.22672391501878
+        },
+        {
+          "latitude": 25.67662865113952,
+          "longitude": -100.22608689037759
+        },
+        {
+          "latitude": 25.676563004928642,
+          "longitude": -100.22574893204164
+        },
+        {
+          "latitude": 25.676493203854683,
+          "longitude": -100.22538951603356
+        }
+      ]
+    },
+    "@version": "4"
+  }
+}
