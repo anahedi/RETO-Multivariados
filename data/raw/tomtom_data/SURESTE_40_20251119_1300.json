@@ -1,0 +1,36 @@
+{
+  "flowSegmentData": {
+    "frc": "FRC4",
+    "currentSpeed": 30,
+    "freeFlowSpeed": 42,
+    "currentTravelTime": 27,
+    "freeFlowTravelTime": 19,
+    "confidence": 0.99,
+    "roadClosure": false,
+    "coordinates": {
+      "coordinate": [
+        {
+          "latitude": 25.664923564235345,
+          "longitude": -100.23363194433824
+        },
+        {
+          "latitude": 25.664412545361486,
+          "longitude": -100.23372448054927
+        },
+        {
+          "latitude": 25.66390832382346,
+          "longitude": -100.23382372228285
+        },
+        {
+          "latitude": 25.66343620915603,
+          "longitude": -100.23392966953897
+        },
+        {
+          "latitude": 25.662921255260787,
+          "longitude": -100.23402891127253
+        }
+      ]
+    },
+    "@version": "4"
+  }
+}

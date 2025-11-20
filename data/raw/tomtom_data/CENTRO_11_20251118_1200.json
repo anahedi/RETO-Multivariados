@@ -1,0 +1,84 @@
+{
+  "flowSegmentData": {
+    "frc": "FRC1",
+    "currentSpeed": 54,
+    "freeFlowSpeed": 71,
+    "currentTravelTime": 28,
+    "freeFlowTravelTime": 21,
+    "confidence": 1,
+    "roadClosure": false,
+    "coordinates": {
+      "coordinate": [
+        {
+          "latitude": 25.66653147642562,
+          "longitude": -100.33855593771175
+        },
+        {
+          "latitude": 25.666426917085204,
+          "longitude": -100.3381321486873
+        },
+        {
+          "latitude": 25.666271362232045,
+          "longitude": -100.33717728227778
+        },
+        {
+          "latitude": 25.66612917932814,
+          "longitude": -100.33633372754238
+        },
+        {
+          "latitude": 25.666082263465555,
+          "longitude": -100.33605343670027
+        },
+        {
+          "latitude": 25.666058087812587,
+          "longitude": -100.33590725630891
+        },
+        {
+          "latitude": 25.666048719745763,
+          "longitude": -100.33586031765115
+        },
+        {
+          "latitude": 25.665956172271635,
+          "longitude": -100.3353144881165
+        },
+        {
+          "latitude": 25.66594944841154,
+          "longitude": -100.33527559608576
+        },
+        {
+          "latitude": 25.665930712260025,
+          "longitude": -100.33516294330711
+        },
+        {
+          "latitude": 25.665914620321146,
+          "longitude": -100.33506504267804
+        },
+        {
+          "latitude": 25.665898528380026,
+          "longitude": -100.33496580094447
+        },
+        {
+          "latitude": 25.66589180451667,
+          "longitude": -100.33489874571909
+        },
+        {
+          "latitude": 25.665872992807085,
+          "longitude": -100.33479145735846
+        },
+        {
+          "latitude": 25.665858260743263,
+          "longitude": -100.33471769661054
+        },
+        {
+          "latitude": 25.665842168794583,
+          "longitude": -100.33462113708597
+        },
+        {
+          "latitude": 25.665807340672814,
+          "longitude": -100.33441863030531
+        }
+      ]
+    },
+    "@version": "4"
+  }
+}

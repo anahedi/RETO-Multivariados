@@ -1,0 +1,80 @@
+{
+  "flowSegmentData": {
+    "frc": "FRC1",
+    "currentSpeed": 48,
+    "freeFlowSpeed": 66,
+    "currentTravelTime": 29,
+    "freeFlowTravelTime": 21,
+    "confidence": 1,
+    "roadClosure": false,
+    "coordinates": {
+      "coordinate": [
+        {
+          "latitude": 25.683983290657235,
+          "longitude": -100.26052913634585
+        },
+        {
+          "latitude": 25.683908206297332,
+          "longitude": -100.26062033145237
+        },
+        {
+          "latitude": 25.6837352250466,
+          "longitude": -100.26082954375559
+        },
+        {
+          "latitude": 25.68345626392409,
+          "longitude": -100.2612130996448
+        },
+        {
+          "latitude": 25.683245664084538,
+          "longitude": -100.26147461502381
+        },
+        {
+          "latitude": 25.683194751441935,
+          "longitude": -100.26158056227993
+        },
+        {
+          "latitude": 25.683177302148415,
+          "longitude": -100.26161677210163
+        },
+        {
+          "latitude": 25.683162572223353,
+          "longitude": -100.26164895860983
+        },
+        {
+          "latitude": 25.68315312996271,
+          "longitude": -100.26168516843154
+        },
+        {
+          "latitude": 25.68311694721309,
+          "longitude": -100.26180318562821
+        },
+        {
+          "latitude": 25.683099497908195,
+          "longitude": -100.26189974515277
+        },
+        {
+          "latitude": 25.683009683047317,
+          "longitude": -100.26227391331044
+        },
+        {
+          "latitude": 25.682868879798622,
+          "longitude": -100.26306382386551
+        },
+        {
+          "latitude": 25.682836624953755,
+          "longitude": -100.26324084966053
+        },
+        {
+          "latitude": 25.68278835597751,
+          "longitude": -100.26347956626292
+        },
+        {
+          "latitude": 25.682682451206897,
+          "longitude": -100.26400393812546
+        }
+      ]
+    },
+    "@version": "4"
+  }
+}
