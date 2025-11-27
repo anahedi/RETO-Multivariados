@@ -1,0 +1,84 @@
+{
+  "flowSegmentData": {
+    "frc": "FRC4",
+    "currentSpeed": 28,
+    "freeFlowSpeed": 44,
+    "currentTravelTime": 43,
+    "freeFlowTravelTime": 27,
+    "confidence": 0.98,
+    "roadClosure": false,
+    "coordinates": {
+      "coordinate": [
+        {
+          "latitude": 25.686061990680166,
+          "longitude": -100.34142992467187
+        },
+        {
+          "latitude": 25.686103611143114,
+          "longitude": -100.34137493938705
+        },
+        {
+          "latitude": 25.68615588219398,
+          "longitude": -100.34129447311659
+        },
+        {
+          "latitude": 25.686239047503562,
+          "longitude": -100.34115633935228
+        },
+        {
+          "latitude": 25.686552824179817,
+          "longitude": -100.34059978098156
+        },
+        {
+          "latitude": 25.686645431196855,
+          "longitude": -100.3404321429181
+        },
+        {
+          "latitude": 25.686678893584215,
+          "longitude": -100.34037313431976
+        },
+        {
+          "latitude": 25.686700345764393,
+          "longitude": -100.340328877871
+        },
+        {
+          "latitude": 25.686703065054527,
+          "longitude": -100.34027925700421
+        },
+        {
+          "latitude": 25.68669906165511,
+          "longitude": -100.34021354288333
+        },
+        {
+          "latitude": 25.68668561627489,
+          "longitude": -100.34003115267028
+        },
+        {
+          "latitude": 25.68664407155115,
+          "longitude": -100.33964357346754
+        },
+        {
+          "latitude": 25.686532731620126,
+          "longitude": -100.33863238066868
+        },
+        {
+          "latitude": 25.686534091267124,
+          "longitude": -100.33854252666667
+        },
+        {
+          "latitude": 25.686535450914125,
+          "longitude": -100.33847144812776
+        },
+        {
+          "latitude": 25.68657299227206,
+          "longitude": -100.33834940761756
+        },
+        {
+          "latitude": 25.68660245127705,
+          "longitude": -100.33829710454175
+        }
+      ]
+    },
+    "@version": "4"
+  }
+}
