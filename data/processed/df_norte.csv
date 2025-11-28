@@ -1,4 +1,4 @@
-0,1,2,3,4,5,6,7
+station_name,street_name,hour_start,date,weighted_harmonic_speed,avg_tti_street,total_sample_size,avg_travel_time_std
 NORTE,Avenida Licenciado Raúl Salinas Lozano,0,2024-08-01,38.72181981205721,1.0,7333,2.892592592592593
 NORTE,Avenida Licenciado Raúl Salinas Lozano,1,2024-08-01,41.585477884317974,0.9719135802469135,4457,2.6881481481481484
 NORTE,Avenida Licenciado Raúl Salinas Lozano,2,2024-08-01,37.6732167703961,1.129748427672956,2041,2.842075471698113
