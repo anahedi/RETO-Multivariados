@@ -1,0 +1,206 @@
+---
+title: "PCA CCF"
+author: "Ana Paula García Valverde"
+date: "2025-11-28"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+```{r}
+
+library(tidyverse)
+library(psych)
+library(tseries)
+
+```
+
+```{r}
+
+datos_contaminantes <- read.csv("../data/processed/agosto2024.csv", 
+                                stringsAsFactors = FALSE) %>%
+  # Limpieza: Asegurar que los nombres de columna coincidan con tu dataset
+  rename(FECHA_HORA = date, HORA = Hora, ZONA = Zona, PM25 = PM2.5) %>%
+  # Convertir a formato fecha/hora correcto
+  mutate(FECHA_HORA = as.POSIXct(FECHA_HORA, format = "%Y-%m-%d %H:%M:%S"))
+
+
+head(datos_contaminantes)
+
+
+```
+
+```{r}
+
+datos_trafico <- read.csv("../data/processed/df_todo.csv",, stringsAsFactors = FALSE) %>%
+  rename(ZONA = station_name, HORA = hour_start) %>%
+  # Promediar el TTI por Zona, Día y Hora. TTI se calcula por segmento, 
+  # pero lo necesitamos agregado para unirlo a los contaminantes por zona/hora.
+  group_by(ZONA, HORA, date) %>%
+  summarise(TTI_PROMEDIO = mean(avg_tti_street, na.rm = TRUE)) %>%
+  ungroup() %>%
+  # Crear la columna de fecha/hora para la unión
+  mutate(FECHA_HORA = as.POSIXct(paste(date, HORA, ":00:00", sep=""), 
+                                 format = "%Y-%m-%d %H:%M:%S"))
+
+
+# --- B. Unión de Bases de Datos por Tiempo y Zona ---
+# La clave es la hora exacta (FECHA_HORA) y la zona (ZONA).
+datos_combinados <- inner_join(datos_contaminantes, datos_trafico, 
+                               by = c("FECHA_HORA", "ZONA"))
+
+# Mostrar la estructura y resumen de los datos unidos
+print("Estructura de Datos Combinados:")
+str(datos_combinados)
+print("Resumen Estadístico de Variables Clave:")
+summary(datos_combinados[c("TTI_PROMEDIO", "PM25", "NOX", "CO", "O3", "WSR")])
+
+# --- C. Tratamiento de Valores Faltantes (Imputación Simple) ---
+
+# Variables para el PCA y CCF
+vars_pca_ccf <- c("PM25", "NOX", "CO", "O3")
+
+for (var in vars_pca_ccf) {
+  datos_combinados[[var]][is.na(datos_combinados[[var]])] <- 
+    mean(datos_combinados[[var]], na.rm = TRUE)
+}
+# Imputar TTI
+datos_combinados$TTI_PROMEDIO[is.na(datos_combinados$TTI_PROMEDIO)] <- 
+  mean(datos_combinados$TTI_PROMEDIO, na.rm = TRUE)
+
+
+
+```
+
+```{r}
+
+# ==============================================================================
+# PARTE 2: ANÁLISIS DE INTERDEPENDENCIA (PCA - Reducción de Dimensionalidad)
+# ==============================================================================
+
+datos_centro <- datos_combinados %>% filter(ZONA == "CENTRO")
+
+datos_para_pca <- datos_centro %>% 
+  select(PM25, NOX, CO, O3) %>%
+  na.omit() 
+
+# 2.1. Aplicación del PCA
+pca_resultado <- principal(r = datos_para_pca, 
+                           nfactors = 4, # Inicialmente probamos 4 componentes
+                           rotate = "varimax", 
+                           scores = TRUE) 
+
+print("=============================================================================")
+print("RESULTADOS DEL PCA (ANÁLISIS DE INTERDEPENDENCIA) - ZONA CENTRO")
+print("=============================================================================")
+
+# Resumen de PCA (Autovalores, Varianza Explicada)
+print("Varianza Explicada por Componente (Eigenvalues):")
+print(pca_resultado$Vaccounted)
+
+# Gráfico de sedimentación (Scree Plot) para seleccionar el número de componentes
+# Generalmente se retienen componentes con Eigenvalue > 1
+plot(pca_resultado$values, type = "b", main = "Gráfico de Sedimentación (Scree Plot)",
+     xlab = "Componente Principal", ylab = "Autovalor (Eigenvalue)")
+abline(h = 1, col = "red", lty = 2) 
+# 
+
+# Matriz de Cargas (Loadings) después de la rotación Varimax
+print("Matriz de Cargas Rotadas (Loadings) - Criterio Varimax:")
+print(pca_resultado$loadings, cutoff = 0.5)
+
+datos_centro$INDICE_CONTAMINACION_TRAFICO <- pca_resultado$scores[, 1]
+
+print("Primeros valores del nuevo Índice de Contaminación:")
+head(datos_centro$INDICE_CONTAMINACION_TRAFICO)
+
+```
+
+```{r, message=FALSE, warning=FALSE}
+# ==============================================================================
+# PARTE 3: ANÁLISIS DE DEPENDENCIA (CCF - Correlación Cruzada)
+# Evaluación de la relación TTI vs. INDICE_CONTAMINACION con desfase (lag)
+# ==============================================================================
+
+# --- A. Validación de Estacionariedad (Requisito para CCF/Granger) ---
+# Usaremos la prueba ADF para TTI y el nuevo índice de contaminación
+# La hipótesis nula es que la serie NO es estacionaria (tiene raíz unitaria).
+
+print("=============================================================================")
+print("PRUEBA DE ESTACIONARIEDAD (ADF)")
+print("=============================================================================")
+
+# 3.1. Prueba ADF para TTI
+adf_tti <- adf.test(datos_centro$TTI_PROMEDIO, alternative = "stationary")
+print("ADF Test para TTI_PROMEDIO:")
+print(adf_tti)
+
+# 3.2. Prueba ADF para el Índice de Contaminación
+adf_indice <- adf.test(datos_centro$INDICE_CONTAMINACION_TRAFICO, alternative = "stationary")
+print("ADF Test para INDICE_CONTAMINACION_TRAFICO:")
+print(adf_indice)
+
+# Si el p-value > 0.05, la serie NO es estacionaria y debe ser diferenciada
+if (adf_tti$p.value > 0.05) {
+  print("TTI NO es estacionario. Aplicando Diferenciación (d=1).")
+  TTI_SERIE <- diff(datos_centro$TTI_PROMEDIO)
+} else {
+  TTI_SERIE <- datos_centro$TTI_PROMEDIO
+}
+
+if (adf_indice$p.value > 0.05) {
+  print("Índice de Contaminación NO es estacionario. Aplicando Diferenciación (d=1).")
+  CONTAMINACION_SERIE <- diff(datos_centro$INDICE_CONTAMINACION_TRAFICO)
+} else {
+  CONTAMINACION_SERIE <- datos_centro$INDICE_CONTAMINACION_TRAFICO
+}
+
+# Las series deben tener la misma longitud. Si diferenciamos, la longitud cambia.
+len <- min(length(TTI_SERIE), length(CONTAMINACION_SERIE))
+TTI_SERIE <- TTI_SERIE[1:len]
+CONTAMINACION_SERIE <- CONTAMINACION_SERIE[1:len]
+
+
+# --- B. Aplicación de la Correlación Cruzada (CCF) ---
+# CCF explora la correlación entre una variable y valores pasados de la otra.
+# El 'lag' positivo indica que la serie Y (Contaminación) está correlacionada
+# con la serie X (TTI) en un momento anterior. (TTI predice Contaminación)
+
+print("=============================================================================")
+print("RESULTADOS DE CORRELACIÓN CRUZADA (CCF) - TTI vs. ÍNDICE DE CONTAMINACIÓN")
+print("=============================================================================")
+
+# Máximo lag de 24 horas (un día) para ver el efecto retardado
+ccf_resultado <- ccf(TTI_SERIE, CONTAMINACION_SERIE, 
+                     lag.max = 24, 
+                     main = "CCF: TTI vs. Índice de Contaminación",
+                     ylab = "Correlación")
+
+# 
+
+# Muestra los lags con mayor correlación
+ccf_tabla <- data.frame(Lag = ccf_resultado$lag, Correlacion = ccf_resultado$acf) %>%
+  arrange(desc(abs(Correlacion)))
+
+print("Tabla de Correlaciones por Lag (Más Relevantes):")
+print(head(ccf_tabla))
+
+# El 'lag' donde se encuentre el pico de correlación positiva es el tiempo 
+# que tarda el efecto del tráfico en manifestarse en la contaminación.
+# Por ejemplo, un lag de 2 significa que TTI en t-2 predice Contaminación en t.
+
+# --- C. Prueba de Causalidad de Granger (Implementación Simple) ---
+
+library(lmtest)
+
+# Hipótesis Nula: El TTI no causa la Contaminación en el sentido de Granger.
+# Necesitamos que las series sean estacionarias (ya se diferenció si era necesario).
+granger_test <- grangertest(CONTAMINACION_SERIE ~ TTI_SERIE, order = 4)
+print("Prueba de Causalidad de Granger (Orden=4 horas):")
+print(granger_test)
+
+```
