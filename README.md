@@ -1,6 +1,6 @@
 hola!
 En este repositorio encontrarán la estrucutra de nuestro reto.
-
+...
 ├── data
 │   ├── external     <- Datos de fuentes externas
 │   ├── interim      <- Datos intermedios que han sido transformados.
@@ -17,3 +17,5 @@ En este repositorio encontrarán la estrucutra de nuestro reto.
 │   └── figures      <- Gráficos y figuras generadas para los reportes.
 │
 ├── pyproject.toml   <- Archivo de configuración del proyecto y dependencias.
+
+...
